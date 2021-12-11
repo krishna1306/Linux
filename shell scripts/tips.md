@@ -107,3 +107,36 @@ line3
 EOF
 ```
 
+### Handling large variables with spaces
+
+When spaces are present in a variable, `bash` will treat each space separated part as a variable
+
+```bash
+variable=$(curl google.com)
+
+echo $variable
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+```
+
+When this is passed as an argument to a function, only one word is passed
+
+```bash
+function test(){
+	echo $1
+}
+```
+
+```bash
+> test $variable
+<HTML><HEAD><meta
+```
+
+**This behavior might vary from shell to shell.**
+
+_For example, **zsh** doesn't have this behaviour_
+
