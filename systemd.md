@@ -63,12 +63,13 @@ After=postgresql.service
 
 [Service]
 ExecStart= /bin/bash /usr/bin/project-mercury.sh
+WorkingDirectory=/home/pi
 User=project_mercury
 Restart=on-failure
 RestartSec=10
 
 [Install]
-WantedBy graphical.target
+WantedBy=graphical.target
 ```
 
 ```bash
